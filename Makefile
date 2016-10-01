@@ -4,10 +4,16 @@ help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 init: ## Initializes the terraform remote state backend and pulls the correct environments state.
-	@if [ -z $(ENVIRONMENT) ]; then echo "ENVIRONMENT was not set" ; exit 10 ; fi
+	@if [ -z $(BUCKET) ]; then echo "BUCKET was not set" ; exit 10 ; fi
+	@if [ -z $(PROJECT) ]; then echo "BUCKET was not set" ; exit 10 ; fi
 	@rm -rf .terraform/*.tf*
 	@terraform remote config \
 		-backend=S3 \
+        -backend-config="bucket=${BUCKET}" \
+        -backend-config="key=${PROJECT}-aws-base-terraform.tfstate" \
+        -backend-config="region=us-east-1"
+
+}
 		-backend-config="region=us-east-1" \
 		-backend-config="bucket=$(ENVIRONMENT)-useast1-terraform-state" \
 		-backend-config="key=$(ENVIRONMENT).tfstate" \
