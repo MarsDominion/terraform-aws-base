@@ -28,11 +28,11 @@ node {
             if (fileExists("status")) {
                 sh "rm status"
             }
-            sh "./init"
+            sh "./jenkins-init"
             sh "terraform get"
-            sh "set +e; terraform plan -out=plan.out --var-file=environments/cf-poc.tfvars -detailed-exitcode; echo \$? > status"
+            sh "set +e; terraform plan -destroy -out=plan.out -var-file=environments/${env.PROJECT}/${env.PROJECT}.tfvars -detailed-exitcode; echo \$? > status"
             def exitCode = readFile('status').trim()
-            def apply = false
+            def destroy = false
             echo "Terraform Plan Exit Code: ${exitCode}"
             if (exitCode == "0") {
                 currentBuild.result = 'SUCCESS'
@@ -45,27 +45,27 @@ node {
                 stash name: "plan", includes: "plan.out"
                 // slackSend channel: '#ci', color: 'good', message: "Plan Awaiting Approval: ${env.JOB_NAME} - ${env.BUILD_NUMBER} ()"
                 try {
-                    input message: 'Apply Plan?', ok: 'Apply'
-                    apply = true
+                    input message: 'Destroy Plan?', ok: 'Destroy'
+                    destroy = true
                 } catch (err) {
                     // slackSend channel: '#ci', color: 'warning', message: "Plan Discarded: ${env.JOB_NAME} - ${env.BUILD_NUMBER} ()"
-                    apply = false
+                    destroy = false
                     currentBuild.result = 'UNSTABLE'
                 }
             }
  
-            if (apply) {
-                stage name: 'Apply', concurrency: 1
+            if (destroy) {
+                stage name: 'Destroy', concurrency: 1
                 unstash 'plan'
-                if (fileExists("status.apply")) {
-                    sh "rm status.apply"
+                if (fileExists("status.destroy")) {
+                    sh "rm status.destroy"
                 }
-                sh 'set +e; terraform apply plan.out; echo \$? > status.apply'
-                def applyExitCode = readFile('status.apply').trim()
-                if (applyExitCode == "0") {
+                sh 'set +e; terraform destroy -force -var-file=environments/${env.PROJECT}/${env.PROJECT}.tfvars; echo \$? > status.destroy'
+                def destroyExitCode = readFile('status.destroy').trim()
+                if (destroyExitCode == "0") {
                     // slackSend channel: '#ci', color: 'good', message: "Changes Applied ${env.JOB_NAME} - ${env.BUILD_NUMBER} ()"    
                 } else {
-                    // slackSend channel: '#ci', color: 'danger', message: "Apply Failed: ${env.JOB_NAME} - ${env.BUILD_NUMBER} ()"
+                    // slackSend channel: '#ci', color: 'danger', message: "Destroy Failed: ${env.JOB_NAME} - ${env.BUILD_NUMBER} ()"
                     currentBuild.result = 'FAILURE'
                 }
             }
