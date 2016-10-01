@@ -4,3 +4,8 @@ variable "aws_region" {}
 variable "vpc_name" {}
 variable "vpc_cidr" {}
 variable "r53_zone_name" {}
+
+# Public Subnets
+variable "public-1a_subnet_cidr" {}
+variable "public-1b_subnet_cidr" {}
+variable "public-1c_subnet_cidr" {}
