@@ -60,7 +60,7 @@ node {
                 if (fileExists("status.destroy")) {
                     sh "rm status.destroy"
                 }
-                sh 'set +e; terraform destroy -force -var-file=environments/${env.PROJECT}/${env.PROJECT}.tfvars; echo \$? > status.destroy'
+                sh "set +e; terraform destroy -force -make var-file=environments/${env.PROJECT}/${env.PROJECT}.tfvars; echo \$? > status.destroy"
                 def destroyExitCode = readFile('status.destroy').trim()
                 if (destroyExitCode == "0") {
                     // slackSend channel: '#ci', color: 'good', message: "Changes Applied ${env.JOB_NAME} - ${env.BUILD_NUMBER} ()"    
