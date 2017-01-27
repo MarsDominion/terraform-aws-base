@@ -4,3 +4,4 @@
 .idea/
 .terraform/
 setup
+terraform-aws-base.iml

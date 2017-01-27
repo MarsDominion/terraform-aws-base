@@ -5,7 +5,7 @@ help:
 
 init: ## Initializes the terraform remote state backend and pulls the correct environments state.
 	@if [ -z $(BUCKET) ]; then echo "BUCKET was not set" ; exit 10 ; fi
-	@if [ -z $(PROJECT) ]; then echo "BUCKET was not set" ; exit 10 ; fi
+	@if [ -z $(PROJECT) ]; then echo "PROJECT was not set" ; exit 10 ; fi
 	@rm -rf .terraform/*.tf*
 	@terraform remote config \
 		-backend=S3 \
