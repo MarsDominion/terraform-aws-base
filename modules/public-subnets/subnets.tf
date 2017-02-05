@@ -12,7 +12,7 @@ resource "aws_subnet" "public-1a" {
 }
 
 resource "aws_subnet" "public-1b" {
-  count                   = "${var.public-1a_create}"
+  count                   = "${var.public-1b_create}"
   vpc_id                  = "${var.vpc_id}"
   cidr_block              = "${var.public-1b_subnet_cidr}"
   map_public_ip_on_launch = true
@@ -25,7 +25,7 @@ resource "aws_subnet" "public-1b" {
 }
 
 resource "aws_subnet" "public-1c" {
-  count                   = "${var.public-1a_create}"
+  count                   = "${var.public-1c_create}"
   vpc_id                  = "${var.vpc_id}"
   cidr_block              = "${var.public-1c_subnet_cidr}"
   map_public_ip_on_launch = true
