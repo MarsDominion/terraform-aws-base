@@ -10,7 +10,7 @@ init: ## Initializes the terraform remote state backend and pulls the correct en
 	@terraform remote config \
 		-backend=S3 \
         -backend-config="bucket=${BUCKET}" \
-        -backend-config="key=${PROJECT}-aws-base-terraform.tfstate" \
+        -backend-config="key=terraform/${PROJECT}-aws-base-terraform.tfstate" \
         -backend-config="region=us-east-1"
 	@terraform remote pull
 
