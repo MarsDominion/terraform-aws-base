@@ -20,7 +20,7 @@ The variables that are needed are set in the environments directory.  This allow
     
     # public-subnets module
     public-1a_create = true                             # Bolean to determine whether
-    public-1b_create = false                            # or not to build each each 
+    public-1b_create = false                            # or not to build each 
     public-1c_create = false                            # subnet 
     
     public-1a_subnet_cidr = "10.233.0.0/28"             # CIDR for AZ1 Subnet
