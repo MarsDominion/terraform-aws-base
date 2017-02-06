@@ -15,3 +15,15 @@ output "nat-gw-1c" {
 output "r53-zone" {
   value = "${module.aws-vpc.r53-zone}"
 }
+
+output "public_1a_create" {
+  value = "${var.public-1a_create}"
+}
+
+output "public_1b_create" {
+  value = "${var.public-1b_create}"
+}
+
+output "public_1c_create" {
+  value = "${var.public-1c_create}"
+}
