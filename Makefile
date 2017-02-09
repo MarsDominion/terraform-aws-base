@@ -10,7 +10,7 @@ init: ## Initializes the terraform remote state backend and pulls the correct en
 	@terraform remote config \
 		-backend=S3 \
         -backend-config="bucket=${BUCKET}" \
-        -backend-config="key=terraform/${PROJECT}-aws-base-terraform.tfstate" \
+        -backend-config="key=terraform/terraform-aws-base.tfstate" \
         -backend-config="region=us-east-1"
 	@terraform remote pull
 
@@ -32,7 +32,7 @@ graph: ## Runs the terraform grapher
 	@open graph.png
 
 apply: init update ## Applies a new state.
-	@terraform apply -input=true -refresh=true -var-file=environments/$(PROJECTS)/inputs.tfvars && terraform remote push
+	@terraform apply -input=true -refresh=true -var-file=environments/$(PROJECT)/inputs.tfvars && terraform remote push
 
 output: update ## Show outputs of a module or the entire state.
 	@if [ -z $(MODULE) ]; then terraform output ; else terraform output -module=$(MODULE) ; fi
