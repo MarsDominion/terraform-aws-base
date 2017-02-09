@@ -12,3 +12,11 @@ variable "public-1c_create" {}
 variable "public-1a_subnet_cidr" {}
 variable "public-1b_subnet_cidr" {}
 variable "public-1c_subnet_cidr" {}
+
+# Apps Subnets
+variable "apps-1a_create" {}
+variable "apps-1b_create" {}
+variable "apps-1c_create" {}
+variable "apps-1a_subnet_cidr" {}
+variable "apps-1b_subnet_cidr" {}
+variable "apps-1c_subnet_cidr" {}

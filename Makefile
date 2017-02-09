@@ -18,10 +18,10 @@ update: ## Gets any module updates
 	@terraform get -update=true &>/dev/null
 
 plan: init update ## Runs a plan. Note that in Terraform < 0.7.0 this can create state entries.
-	@terraform plan -input=false -refresh=true -module-depth=-1 -var-file=environments/$(PROJECT)/$(PROJECT).tfvars
+	@terraform plan -input=false -refresh=true -module-depth=-1 -var-file=environments/$(PROJECT)/inputs.tfvars
 
 plan-destroy: init update ## Shows what a destroy would do.
-	@terraform plan -input=false -refresh=true -module-depth=-1 -destroy -var-file=environments/$(PROJECT)/$(PROJECT).tfvars
+	@terraform plan -input=false -refresh=true -module-depth=-1 -destroy -var-file=environments/$(PROJECT)/inputs.tfvars
 
 show: init ## Shows a module
 	@terraform show -module-depth=-1
@@ -32,10 +32,10 @@ graph: ## Runs the terraform grapher
 	@open graph.png
 
 apply: init update ## Applies a new state.
-	@terraform apply -input=true -refresh=true -var-file=environments/$(PROJECTS)/$(PROJECT).tfvars && terraform remote push
+	@terraform apply -input=true -refresh=true -var-file=environments/$(PROJECTS)/inputs.tfvars && terraform remote push
 
 output: update ## Show outputs of a module or the entire state.
 	@if [ -z $(MODULE) ]; then terraform output ; else terraform output -module=$(MODULE) ; fi
 
 destroy: init update ## Destroys targets
-	@terraform destroy -var-file=environments/$(PROJECT)/$(PROJECT).tfvars && terraform remote push
+	@terraform destroy -var-file=environments/$(PROJECT)/inputs.tfvars && terraform remote push
