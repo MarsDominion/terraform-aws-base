@@ -7,12 +7,10 @@ init: ## Initializes the terraform remote state backend and pulls the correct en
 	@if [ -z $(BUCKET) ]; then echo "BUCKET was not set" ; exit 10 ; fi
 	@if [ -z $(PROJECT) ]; then echo "PROJECT was not set" ; exit 10 ; fi
 	@rm -rf .terraform/*.tf*
-	@terraform remote config \
-		-backend=S3 \
+	@terraform init \
         -backend-config="bucket=${BUCKET}" \
         -backend-config="key=terraform/terraform-aws-base.tfstate" \
         -backend-config="region=us-east-1"
-	@terraform remote pull
 
 update: ## Gets any module updates
 	@terraform get -update=true &>/dev/null
@@ -32,10 +30,10 @@ graph: ## Runs the terraform grapher
 	@open graph.png
 
 apply: init update ## Applies a new state.
-	@terraform apply -input=true -refresh=true -var-file=environments/$(PROJECT)/inputs.tfvars && terraform remote push
+	@terraform apply -input=true -refresh=true -var-file=environments/$(PROJECT)/inputs.tfvars
 
 output: update ## Show outputs of a module or the entire state.
 	@if [ -z $(MODULE) ]; then terraform output ; else terraform output -module=$(MODULE) ; fi
 
 destroy: init update ## Destroys targets
-	@terraform destroy -var-file=environments/$(PROJECT)/inputs.tfvars && terraform remote push
+	@terraform destroy -var-file=environments/$(PROJECT)/inputs.tfvars
