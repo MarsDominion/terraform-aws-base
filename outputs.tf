@@ -12,6 +12,10 @@ output "nat-gw-1c" {
   value = "${module.public-subnets.nat-gw-1c}"
 }
 
+output "internet-gateway" {
+  value = "${module.public-subnets.internet-gateway}"
+}
+
 output "r53-zone" {
   value = "${module.aws-vpc.r53-zone}"
 }

@@ -7,3 +7,6 @@ output "nat-gw-1b" {
 output "nat-gw-1c" {
   value = "${aws_nat_gateway.nat-gw-1b.id}"
 }
+output "internet-gateway" {
+  value = "${aws_internet_gateway.default.id}"
+}
