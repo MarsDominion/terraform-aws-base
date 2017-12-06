@@ -4,7 +4,7 @@ This repository builds out the base components of an AWS Environment.  It create
 # Methodology
 The goal of my terraform project is to create code that can be used in across multiple environments (such as dev, staging, prod).  To do this, it uses the environments folder to define the variables for each environment.  The naming convention that I use is $AWS_ACCOUNT_NAME/inputs.tfvars.
 
-This provides the foundation for other Terraform 
+This provides the foundation for other Terraform states, such as my [apps-network state](https://github.com/AustinCloudGuru/terraform-aws-apps-network).
 
 # Variables
 The variables that are needed are set in the environments directory.  This allows you to setup a different VPCs for different environments (i.e. dev, stage, or prod).  The variables that need to be set are:

@@ -2,14 +2,14 @@ output "vpc_id" {
   value = "${module.aws-vpc.vpc_id}"
 }
 
-output "nat-gw-1a" {
-  value = "${module.public-subnets.nat-gw-1a}"
+output "nat-gw-1" {
+  value = "${module.public-subnets.nat-gw-1}"
 }
-output "nat-gw-1b" {
-  value = "${module.public-subnets.nat-gw-1b}"
+output "nat-gw-2" {
+  value = "${module.public-subnets.nat-gw-2}"
 }
-output "nat-gw-1c" {
-  value = "${module.public-subnets.nat-gw-1c}"
+output "nat-gw-3" {
+  value = "${module.public-subnets.nat-gw-3}"
 }
 
 output "internet-gateway" {
