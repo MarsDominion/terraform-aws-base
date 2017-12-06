@@ -1,5 +1,5 @@
-resource "aws_route_table" "public-1a" {
-  count               = "${var.public-1a_create}"
+resource "aws_route_table" "public-1" {
+  count               = "${var.public-1_create}"
   vpc_id              = "${var.vpc_id}"
 
   route {
@@ -8,20 +8,20 @@ resource "aws_route_table" "public-1a" {
   }
 
   tags {
-    Name              = "Public 1a Subnet"
-    Description       = "Public Subnet us-east-1a"
+    Name              = "Public 1 Subnet"
+    Description       = "Public Subnet ${data.aws_availability_zones.available.names[0]}"
     Terraform         = "true"
   }
 }
 
-resource "aws_route_table_association" "public-1a-rta" {
-  count               = "${var.public-1a_create}"
-  subnet_id           = "${aws_subnet.public-1a.id}"
-  route_table_id      = "${aws_route_table.public-1a.id}"
+resource "aws_route_table_association" "public-1-rta" {
+  count               = "${var.public-1_create}"
+  subnet_id           = "${aws_subnet.public-1.id}"
+  route_table_id      = "${aws_route_table.public-1.id}"
 }
 
-resource "aws_route_table" "public-1b" {
-  count               = "${var.public-1b_create}"
+resource "aws_route_table" "public-2" {
+  count               = "${var.public-2_create}"
   vpc_id              = "${var.vpc_id}"
 
   route {
@@ -30,20 +30,20 @@ resource "aws_route_table" "public-1b" {
   }
 
   tags {
-      Name            = "Public 1b Subnet"
-      Description     = "Public Subnet us-east-1b"
+      Name            = "Public 2 Subnet"
+      Description     = "Public Subnet ${data.aws_availability_zones.available.names[1]}"
       Terraform       = "true"
   }
 }
 
-resource "aws_route_table_association" "public-1b-rta" {
-  count               = "${var.public-1b_create}"
-  subnet_id           = "${aws_subnet.public-1b.id}"
-  route_table_id      = "${aws_route_table.public-1b.id}"
+resource "aws_route_table_association" "public-2-rta" {
+  count               = "${var.public-2_create}"
+  subnet_id           = "${aws_subnet.public-2.id}"
+  route_table_id      = "${aws_route_table.public-2.id}"
 }
 
-resource "aws_route_table" "public-1c" {
-  count               = "${var.public-1c_create}"
+resource "aws_route_table" "public-3" {
+  count               = "${var.public-3_create}"
   vpc_id              = "${var.vpc_id}"
 
   route {
@@ -52,14 +52,14 @@ resource "aws_route_table" "public-1c" {
   }
 
   tags {
-      Name            = "Public 1c Subnet"
-      Description     = "Public Subnet us-east-1c"
+      Name            = "Public 3 Subnet"
+      Description     = "Public Subnet ${data.aws_availability_zones.available.names[2]}"
       Terraform       = "true"
   }
 }
 
-resource "aws_route_table_association" "public-1c-rta" {
-  count               = "${var.public-1c_create}"
-  subnet_id           = "${aws_subnet.public-1c.id}"
-  route_table_id      = "${aws_route_table.public-1c.id}"
+resource "aws_route_table_association" "public-3-rta" {
+  count               = "${var.public-3_create}"
+  subnet_id           = "${aws_subnet.public-3.id}"
+  route_table_id      = "${aws_route_table.public-3.id}"
 }
