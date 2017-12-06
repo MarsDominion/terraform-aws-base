@@ -7,11 +7,11 @@ module "aws-vpc" {
 
 module "public-subnets" {
   source                    = "./modules/public-subnets"
-  public-1a_create          = "${var.public-1a_create}"
-  public-1b_create          = "${var.public-1b_create}"
-  public-1c_create          = "${var.public-1c_create}"
-  public-1a_subnet_cidr     = "${var.public-1a_subnet_cidr}"
-  public-1b_subnet_cidr     = "${var.public-1b_subnet_cidr}"
-  public-1c_subnet_cidr     = "${var.public-1c_subnet_cidr}"
+  public-1_create          = "${var.public-1_create}"
+  public-2_create          = "${var.public-2_create}"
+  public-3_create          = "${var.public-3_create}"
+  public-1_subnet_cidr     = "${var.public-1_subnet_cidr}"
+  public-2_subnet_cidr     = "${var.public-2_subnet_cidr}"
+  public-3_subnet_cidr     = "${var.public-3_subnet_cidr}"
   vpc_id                    = "${module.aws-vpc.vpc_id}"
 }

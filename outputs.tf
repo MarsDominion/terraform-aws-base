@@ -20,14 +20,14 @@ output "r53-zone" {
   value = "${module.aws-vpc.r53-zone}"
 }
 
-output "public_1a_create" {
-  value = "${var.public-1a_create}"
+output "public_1_create" {
+  value = "${var.public-1_create}"
 }
 
-output "public_1b_create" {
-  value = "${var.public-1b_create}"
+output "public_2_create" {
+  value = "${var.public-2_create}"
 }
 
-output "public_1c_create" {
-  value = "${var.public-1c_create}"
+output "public_3_create" {
+  value = "${var.public-3_create}"
 }

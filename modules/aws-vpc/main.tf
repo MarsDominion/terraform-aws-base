@@ -11,7 +11,6 @@ resource "aws_vpc" "main_vpc" {
 resource "aws_route53_zone" "r53_zone" {
   name            = "${var.r53_zone_name}"
   tags {
-    Name          = "POC"
     Terraform     = "true"
   }
 }

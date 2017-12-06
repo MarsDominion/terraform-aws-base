@@ -1,32 +1,32 @@
-resource "aws_eip" "nat-1a" {
-  count           = "${var.public-1a_create}"
+resource "aws_eip" "nat-1" {
+  count           = "${var.public-1_create}"
   vpc             = true
 }
 
-resource "aws_nat_gateway" "nat-gw-1a" {
-  count           = "${var.public-1a_create}"
-  allocation_id   = "${aws_eip.nat-1a.id}"
-  subnet_id       = "${aws_subnet.public-1a.id}"
+resource "aws_nat_gateway" "nat-gw-1" {
+  count           = "${var.public-1_create}"
+  allocation_id   = "${aws_eip.nat-1.id}"
+  subnet_id       = "${aws_subnet.public-1.id}"
 }
 
-resource "aws_eip" "nat-1b" {
-    count         = "${var.public-1b_create}"
+resource "aws_eip" "nat-2" {
+    count         = "${var.public-2_create}"
     vpc           = true
 }
 
-resource "aws_nat_gateway" "nat-gw-1b" {
-    count         = "${var.public-1b_create}"
-    allocation_id = "${aws_eip.nat-1b.id}"
-    subnet_id     = "${aws_subnet.public-1b.id}"
+resource "aws_nat_gateway" "nat-gw-2" {
+    count         = "${var.public-2_create}"
+    allocation_id = "${aws_eip.nat-2.id}"
+    subnet_id     = "${aws_subnet.public-2.id}"
 }
 
-resource "aws_eip" "nat-1c" {
-    count         = "${var.public-1c_create}"
+resource "aws_eip" "nat-3" {
+    count         = "${var.public-3_create}"
     vpc           = true
 }
 
-resource "aws_nat_gateway" "nat-gw-1c" {
-    count         = "${var.public-1c_create}"
-    allocation_id = "${aws_eip.nat-1c.id}"
-    subnet_id     = "${aws_subnet.public-1c.id}"
+resource "aws_nat_gateway" "nat-gw-3" {
+    count         = "${var.public-3_create}"
+    allocation_id = "${aws_eip.nat-3.id}"
+    subnet_id     = "${aws_subnet.public-3.id}"
 }
